@@ -1,0 +1,23 @@
+name: GatorGoTestApp
+
+options:
+  bundleId: com.gatorgo.testapp
+  deploymentTarget:
+    iOS: "17.0"
+  organizationName: GatorGo
+
+settings:
+  SWIFT_VERSION: 5.9
+
+targets:
+  GatorGoTestApp:
+    type: application
+    platform: iOS
+    sources:
+      - GatorGoTestApp
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.gatorgo.testapp
+      SWIFT_VERSION: 5.9
+      TARGETED_DEVICE_FAMILY: "1"
+      INFOPLIST_FILE: GatorGoTestApp/Info.plist
+
