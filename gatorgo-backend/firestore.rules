@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+
+    match /resources/{id} { allow read: if true; allow write: if false; }
+    match /landmarks/{id} { allow read: if true; allow write: if false; }
+    match /collections/{id} { allow read: if true; allow write: if false; }
+
+    match /users/{uid} {
+      allow read, create, update: if isOwner(uid);
+      allow delete: if false;
+    }
+
+    // Claims and AI logs are written by trusted backend code only.
+    match /landmarkClaims/{id} { allow read, write: if false; }
+    match /aiInteractions/{id} { allow read, write: if false; }
+  }
+}
